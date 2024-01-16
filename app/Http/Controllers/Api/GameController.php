@@ -11,7 +11,6 @@ use Mews\Captcha\Facades\Captcha;
 class GameController extends Controller {
 
     /*
-     * 弹头掉落接口
      * 金币消耗换算成鱼雷，设定一个阈值，超过阈值和boss一样必掉，保证使用的多也能掉的多或者至少能掉
      * 金币余额和buff值对比作为一个系数
      * 设定一个幸运值，保证多少次能掉完，记录一个字段
