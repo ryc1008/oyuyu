@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class VipController extends Controller
 {
-
     public function iframe(Request $request){
         try {
             $acc = $request->get('acc', '');
