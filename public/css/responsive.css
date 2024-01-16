@@ -1,0 +1,155 @@
+@media (min-width: 980px){
+    .header .mobile-nav{
+        display: none;
+    }
+}
+@media (min-width: 768px) and (max-width: 980px) {
+
+}
+
+@media (max-width: 768px) {
+
+
+
+}
+
+
+@media (max-width: 480px) {
+    .main{
+        padding-top: 100px;
+    }
+    .hong-item .item-title{
+        font-size: 24px;
+    }
+    .hong-item .item-title span{
+        font-size: 20px;
+    }
+    .hong-item .item-desc{
+        font-size: 12px;
+    }
+    .header{
+        height: 50px;
+    }
+    .banner .swiper-content{
+        flex-wrap: wrap;
+    }
+    .banner .swiper-info{
+        float: start;
+    }
+    .banner .swiper-img{
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .banner .swiper-title{
+        font-size: 45px;
+    }
+    .banner .swiper-ying{
+        font-size: 12px;
+    }
+    .banner .swiper-button{
+        border: 2px solid #dd483f;;
+    }
+    .business-box .business{
+        display: block;
+    }
+    .business-box .busright {
+        padding-right: 0px;margin-top: 50px;
+    }
+    .about-box .about {
+        display: block;
+    }
+    .about .about-right {
+        margin-left: 0px;
+    }
+    .about .about-image{
+        padding-left: 45px;
+        display: inline-block;
+        height: auto;
+    }
+    .about .about-image img {
+        width: 80%;
+        height: auto;
+    }
+    .about .about-flag .d-flex img{
+        height: 40px;
+    }
+    .about .about-flag {
+        bottom: 10px;
+        padding: 20px 40px 10px ;
+        margin-left: 30px;
+    }
+    .about .about-flag .flag-title {
+        font-size: 18px;
+        line-height: 35px;
+    }
+
+    .about .about-flag .flag-desc {
+        font-size: 12px;
+        color: #dee5f0;
+    }
+    .about .about-flag .flag-di {
+        left: -65px;
+        bottom: -40px;
+    }
+    .about .about-flag .flag-di img{
+        width: 80%;
+    }
+    .partner .partner-item {
+        width: 170px;
+        height: 90px;
+    }
+    .partner .partner-item img {
+        height: 90px;
+    }
+    .footer .link{
+        text-align: center;
+    }
+    .partner .partner-flag .flag-item-0 {
+        left: 40%;
+    }
+    .partner .partner-flag .flag-item-1 {
+        left: 30%;
+        top: 30%;
+    }
+    .partner .partner-flag .flag-item-3 {
+        left: 75%;
+        top: 50%;
+    }
+    .partner .partner-flag .flag-item-4 {
+        left: 18%;
+    }
+    .partner .partner-flag .flag-item-5 {
+        left: 20%;
+    }
+    .partner .partner-flag .flag-item-7 {
+        left: 45%;
+        top: 90%;
+    }
+    .partner .partner-flag .flag-item-8 {
+        left: 65%;
+        top: 70%;
+    }
+    .footer .contact{
+        margin-top: 15px;
+    }
+    .header .header-nav, .header .header-top, .banner .swiper-button span.line, .footer .links,
+    .footer .footer-wcode, .footer .footer-copyright i{
+        display: none;
+    }
+    .header .mobile-nav ,.footer .footer-copyright a{
+        display: block;
+    }
+}
+
+@media (max-width:320px) {
+    .partner-flag{
+        /*padding-right: 35px;*/
+    }
+
+}
+
+
+
+

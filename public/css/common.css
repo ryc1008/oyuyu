@@ -1,0 +1,358 @@
+html, body {
+    background: linear-gradient(to bottom, #0E071B , #031025 );
+    color: white;
+    font-family: PingFang SC-Medium, PingFang SC;
+}
+ul{
+    padding-inline-start: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+ul li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+
+/**************** header ********************/
+.header {
+    height: 125px;
+    border-bottom: 1px solid #031025;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #0E071B;
+    z-index: 500;
+}
+
+.header .header-top {
+    font-size: 12px;
+    background: #031025;
+    line-height: 35px;
+    height: 35px;
+    color: #8a8c99;
+}
+
+.header .header-nav {
+    padding: 15px 0;
+}
+
+.header .logo img {
+    width: 240px;
+    height: 60px;
+}
+
+.header .nav-link {
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.header .nav-link:focus, .header .nav-link:hover, .header .nav-link.active {
+    color: #FB2337;
+}
+.header .nav-logo {
+    padding: 0 15px;
+    overflow: hidden;
+    height: 60px;
+    width: 100%;
+}
+.header .mobile-nav img{
+    width: auto;
+    height: 40px;
+}
+.header .mobile-nav .fa-align-justify{
+    font-size: 22px;
+    cursor: pointer;
+}
+.header .nav-link:hover:before {
+    content: "";
+    position: absolute;
+    width: 1000px;
+    height: 20px; /**白光的宽度，可根据实际调整**/
+    background-image: linear-gradient(to bottom, transparent, rgb(251, 35, 55, 0.5), transparent);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-animation: lights 3s ease-in 1s infinite;
+    -o-animation: lights 3s ease-in 1s infinite;
+    animation: lights 3s ease-in 0s infinite; /**第一个数字参数控制扫光速度，数字越大越慢**/
+}
+
+@keyframes lights {
+    0% {
+        left: -200px;
+        top: -300px;
+    }
+    100% {
+        left: -160px;
+        top: 800px;
+    }
+}
+
+/**************** banner ********************/
+.swiper {
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+}
+
+.swiper .swiper-title {
+    font-family: PingFang SC-Bold, PingFang SC;
+    color: #FFFFFF;
+    letter-spacing: 3px;
+    font-size: 55px;
+    margin-bottom: 20px;
+}
+
+.swiper .swiper-ying {
+    font-family: PingFang SC-Regular, PingFang SC;
+    letter-spacing: 6px;
+    font-size: 16px;
+    margin-bottom: 85px;
+    text-align: right;
+}
+
+.swiper .swiper-content {
+    height: 550px;position: relative;
+}
+.swiper .swiper-img img {
+    height: auto;
+    width: 400px;
+    pointer-events: none;
+    transition-duration: .3s;
+    animation-name: img-shadow;
+    animation-duration: 2s;
+    animation-delay: .3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate
+}
+
+
+.swiper .swiper-button {
+    width: 200px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    line-height: 60px;
+    height: 60px;
+    cursor: pointer;
+    overflow: hidden;
+    margin-left: 35px;
+}
+
+
+.swiper #button-svg {
+    stroke-width: 4px;
+    fill: transparent;
+    stroke: #dd483f;
+    stroke-dasharray: 0 400;
+    stroke-dashoffset: -328;
+    transition: 1s all ease;
+}
+
+.swiper .swiper-button:hover #button-svg {
+    stroke-dasharray: 50 0;
+    stroke-width: 4px;
+    stroke-dashoffset: 0;
+    stroke: #dd483f;
+}
+
+.swiper #button-text {
+    margin-top: -60px;
+    text-align: center;
+    color: #FFF;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-family: PingFang SC-Medium, PingFang SC;
+    letter-spacing: 2px;
+    z-index: 500;
+}
+
+/*.swiper .swiper-button:hover #button-text {*/
+/*    color: #dd483f;*/
+/*}*/
+
+.swiper .swiper-button span {
+    position: absolute;
+    background-color: #dd483f;
+    display: block;
+    transition: all 200ms;
+}
+
+.swiper-button .line1,
+.swiper-button .line3 {
+    height: 2px;
+    width: 20px;
+}
+
+.swiper-button .line2,
+.swiper-button .line4 {
+    height: 20px;
+    width: 2px;
+}
+
+.swiper-button .line1,
+.swiper-button .line2 {
+    top: 0;
+    right: 0;
+}
+
+.swiper-button .line3,
+.swiper-button .line4 {
+    bottom: 0;
+    left: 0;
+}
+
+/**************** footer ********************/
+.footer-box{
+    color: #8a8c99;
+    background: #031025;
+    font-size: 14px;
+    padding: 25px 0 0;
+    border-top: 1px solid #0E071B;
+}
+.footer a{
+    color: #8a8c99;
+}
+.footer .name{
+    font-size: 20px;color: #ffffff;
+}
+.footer .ying{
+    color: #dee5f0;
+    font-size: 15px;margin: 15px 0 20px;
+}
+.footer .link li{
+    line-height: 30px;
+}
+.footer .link li.title{
+    margin-bottom: 10px;
+}
+.footer .link li.title a{
+    font-size: 16px;color: #dee5f0;
+}
+.footer .link li a:hover{
+    color: #dee5f0;
+}
+.footer .desc{
+    font-size: 14px;
+    line-height: 25px;
+    word-spacing: 1px;
+}
+.footer .contact .fa-solid{
+    width: 12px;
+}
+.footer .address, .footer .tel, .footer .email{
+    margin-bottom: 10px;word-spacing: 1px;
+}
+.footer .footer-copyright{
+    font-size: 12px;
+    line-height: 25px;
+    margin-top: 15px;
+}
+.footer .footer-wcode{
+    /*text-align: center;*/
+}
+.footer .footer-wcode img{
+    width: 120px;height: 120px;
+}
+.footer .qq a{
+    padding: 3px 15px;
+    border-radius: 5px;
+    border: 1px solid #8a8c99;
+    background: transparent;
+    font-size: 12px;color: #ffffff;
+}
+.footer .qq a:hover, .footer .qq a:focus{
+    background:  #FB2337;color: #fff;
+    border: 1px solid #FB2337;
+}
+.footer .footer-copyright i{
+    font-style: normal;
+}
+
+/**************** 公用 ********************/
+.main{
+    padding-top: 125px;
+}
+.hong-item{
+    margin-top: 100px;
+}
+.hong-item .item-title{
+    font-size: 36px;
+    color: #FFFFFF;
+    line-height: 42px;
+    letter-spacing: 1px;
+}
+.hong-item .item-title span{
+    font-size: 32px;
+    color: #D21711;
+    position: relative;top:5px
+}
+.hong-item .item-desc{
+    font-size: 16px;margin-top: 30px;
+
+}
+@keyframes hover {
+    50% {
+        transform: translateY(-3px)
+    }
+
+    100% {
+        transform: translateY(-6px)
+    }
+}
+@keyframes hover-shadow {
+    0% {
+        transform: translateY(6px);
+        opacity: .6
+    }
+
+    50% {
+        transform: translateY(3px);
+        opacity: 1
+    }
+
+    100% {
+        transform: translateY(6px);
+        opacity: .6
+    }
+}
+@keyframes img-shadow {
+    0% {
+        transform: translateY(6px);
+        opacity: .8
+    }
+
+    50% {
+        transform: translateY(3px);
+        opacity: 1
+    }
+
+    100% {
+        transform: translateY(6px);
+        opacity: .8
+    }
+}
+@keyframes breathe{
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+
+    50%,75% {
+        -webkit-transform: scale(3);
+        transform: scale(3)
+    }
+
+    78%,to {
+        opacity: 0
+    }
+}
