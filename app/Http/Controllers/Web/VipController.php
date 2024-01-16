@@ -37,7 +37,6 @@ class VipController extends Controller
         }
     }
 
-
     //兑换
     public function update(Request $request){
         try {
