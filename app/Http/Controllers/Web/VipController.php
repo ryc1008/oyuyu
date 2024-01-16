@@ -3,16 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Airdrop;
-use App\Models\Category;
 use App\Models\Cost;
-use App\Models\Demand;
 use App\Models\User;
-use Carbon\Carbon;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use QL\QueryList;
 
 class VipController extends Controller
 {
@@ -36,6 +29,7 @@ class VipController extends Controller
             return $this->returnJson(1, null, $e->getMessage());
         }
     }
+
 
     //兑换
     public function update(Request $request){
