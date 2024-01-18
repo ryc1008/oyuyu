@@ -25,6 +25,9 @@ class IndexController extends Controller
 //        dump($maxKey);
     }
 
+
+
+
 //    protected function level($vipExp){
 //        $exps = [10, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000];
 //        $records = array_filter($exps, function ($item) use($vipExp){
