@@ -49,7 +49,6 @@
 {{--            http://111.230.11.24:85/h5GameNew?t={{$time}}       http://localhost:7456/  --}}
             <iframe src="http://111.230.11.24:85/h5GameNew?t={{$time}}"  width="100%" height="100%" class="myiframe" id="game"></iframe>
         </div>
-
     </body>
     <script>
         // window.location.href = 'http://www.huayinfood.com';
