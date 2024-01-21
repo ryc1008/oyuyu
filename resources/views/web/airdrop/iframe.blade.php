@@ -222,7 +222,7 @@
                 <div class="form-item-title">空投数量： </div>
                 <div class="number-box">
                     <img class="dec-number" src="{{ asset('image/web/dec.png') }}" alt="">
-                    <input type="number"  id="airdrop-number" name="number" class='number' value="0" placeholder="空投数量">
+                    <input type="number"  name="number" class='number airdrop-number' value="0" placeholder="空投数量">
                     <img class="add-number" src="{{ asset('image/web/add.png') }}" alt="">
                 </div>
             </div>
@@ -283,8 +283,9 @@
         $('.airdrop ul li').on('click', function (){
             $(".c-tab").hide();
             if($(this).hasClass('form')){
-                $(".cate-box .cate:first").addClass('active').siblings().removeClass('active');
-                $('.airdrop-form').show();
+                window.location.reload();
+                // $(".cate-box .cate:first").addClass('active').siblings().removeClass('active');
+                // $('.airdrop-form').show();
             }
             if($(this).hasClass('record')){
                 $('.airdrop-record').show();
@@ -336,7 +337,35 @@
             }
             $(".form-item .number").val(number);
         })
-
+        $.changeAirdropNumber = function (){
+            if(!disabled){
+                return false;
+            }
+            let number = parseInt($(".form-item .number").val());
+            let type = $('.form-item .cate.active').attr('data-type');
+            let pan = 0;
+            let torpedoSilver = "{{ $torpedo['torpedo_silver'] }}";
+            let torpedoGold = "{{ $torpedo['torpedo_gold'] }}";
+            let torpedoDiamond = "{{ $torpedo['torpedo_diamond'] }}";
+            if(number < 0 || number.toString().includes('.') || !/^\d+$/.test(number) || number.toString().includes('-')){
+                number = 0;
+            }
+            pan = torpedoSilver;
+            if(type == 26){
+                pan = torpedoGold;
+            }
+            if(type == 27){
+                pan = torpedoDiamond;
+            }
+            if(number > pan){
+                layer.msg('鱼雷数量不足');
+                return false;
+            }
+            $(".form-item .number").val(number);
+        }
+        $('.form-item .airdrop-number').on('change', function (){
+            $.changeAirdropNumber();
+        })
         $('.dui-submit').on('click' ,function (){
             if(acc){
                 let code = $('.airdrop-dui .code').val();

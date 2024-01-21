@@ -51,7 +51,6 @@ class Controller extends BaseController
         $data['sign'] = $sign;
         if($method == 'GET'){
             $link .= http_build_query($data);
-            loger($link);
             $result = $client->get($link)->getBody()->getContents();
         }else{
             $result = $client->post($link,  [
@@ -60,7 +59,6 @@ class Controller extends BaseController
                 ],
                 'body' => json_encode($data)
             ])->getBody()->getContents();
-
         }
         $result = json_decode($result, true);
         return $result;

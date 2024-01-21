@@ -46,7 +46,7 @@ class GoldController extends Controller
             $user = User::where('acc', $data['acc'])->first();
             if($user){
                 //更新金币和鱼雷接口 opType//1增加 11减少
-                $result = $this->client('gold_recharge', [
+                $this->client('gold_recharge', [
                     'acc' => $data['acc'],
                     'opType' => 1,
                     'goldNum' => $data['gold'],
@@ -66,8 +66,8 @@ class GoldController extends Controller
                     //增加兑换buff逻辑
                     $buff = $this->buffNum($user, $torpedo);
                     //更新用户buff值和总的buff值，总的兑换量
-                    $update['buff_num'] = $user['buff_num'] + $buff; //buff值
-                    $update['buff_total'] = $user['buff_total'] + $buff; //总的buff值
+                    $update['buff_num'] = (float)$user['buff_num'] + (float)$buff; //buff值
+                    $update['buff_total'] = (float)$user['buff_total'] + (float)$buff; //总的buff值
                     $user->update($update);
                     //生成兑换记录
                     Cost::create([
@@ -80,7 +80,7 @@ class GoldController extends Controller
                     ]);
                     //记录奖池
                     $userJackpot = Jackpot::where('acc', $data['acc'])->first();
-                    $endBuffVal = $torpedo - $buff;
+                    $endBuffVal = (float)$torpedo - (float)$buff;
                     if($userJackpot){
                         $userJackpot->increment('buff', $endBuffVal);
                     }else{
@@ -90,12 +90,12 @@ class GoldController extends Controller
                         ]);
                     }
                     return $this->returnJson(0, $result, '兑换成功，请稍后...');
-                }
-                return $this->returnJson(1, null, $result['msg']);
+               }
+                return $this->returnJson(1, $result, $result['msg']);
             }
             return $this->returnJson(1, null, '参数非法');
         } catch (\Throwable $e) {
-            return $this->returnJson(1, null, $e->getMessage());
+            return $this->returnJson(1, 123123, $e->getMessage());
         }
 
     }

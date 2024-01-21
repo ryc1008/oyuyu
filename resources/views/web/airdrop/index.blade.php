@@ -46,12 +46,21 @@
     </head>
     <body>
         <div class="app">
-{{--            http://111.230.11.24:85/h5GameNew?t={{$time}}       http://localhost:7456/  --}}
             <iframe src="http://111.230.11.24:85/h5GameNew?t={{$time}}"  width="100%" height="100%" class="myiframe" id="game"></iframe>
         </div>
     </body>
     <script>
         // window.location.href = 'http://www.huayinfood.com';
+        {{--layer.open({--}}
+        {{--    type: 2,--}}
+        {{--    skin: '',--}}
+        {{--    title: '',--}}
+        {{--    closeBtn: 1,--}}
+        {{--    shadeClose: false,--}}
+        {{--    shade: 0.7,--}}
+        {{--    area: ['90%', '90%'],--}}
+        {{--    content: "{{ route('gold.iframe')}}?acc=play100018"--}}
+        {{--});--}}
         $(function (){
             window.addEventListener('message',function(e){
                 let data = e.data;
@@ -110,31 +119,8 @@
                             {acc: data.account, nickname: data.nickname, player_id: data.aid, '_token': "{{csrf_token()}}"},
                             function (res){}, 'json');
                         break;
-                    case 'return_diamond':
-                        document.getElementById('game').contentWindow.postMessage(
-                            {
-                                event:"update_diamond",
-                                player_id: data.player_id,
-                                number: data.number,
-                            }, '*');
-                        layer.closeAll();
-                        break;
-                    case 'return_gold':
-                        document.getElementById('game').contentWindow.postMessage(
-                            {
-                                event:"update_gold",
-                                player_id: data.player_id,
-                                number: data.number,
-                            }, '*');
-                        layer.closeAll();
-                        break;
-                    case 'return_vip':
-                        document.getElementById('game').contentWindow.postMessage(
-                            {
-                                event:"update_vip",
-                                player_id: data.player_id,
-                                number: data.number,
-                            }, '*');
+                    case 'return_update':
+                        document.getElementById('game').contentWindow.postMessage('', '*');
                         layer.closeAll();
                         break;
                     default:

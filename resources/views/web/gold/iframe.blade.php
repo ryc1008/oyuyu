@@ -165,7 +165,7 @@
                 <div class="number-box">
                     <div class="form-item-title">兑换数量： </div>
                     <img class="dec-number" src="{{ asset('image/web/dec.png') }}" alt="">
-                    <input type="number"  id="airdrop-number" name="number" class='number' value="0" placeholder="兑换数量">
+                    <input type="number" name="number" class='number gold-number' value="0" placeholder="兑换数量">
                     <img class="add-number" src="{{ asset('image/web/add.png') }}" alt="">
                 </div>
             </div>
@@ -189,7 +189,6 @@
 
     $(function (){
         let acc = "{{ $user['acc'] }}";
-        let player_id = "{{ $user['player_id'] }}";
         let disabled = true;
         $('.form-submit').on('click' ,function (){
             if(acc){
@@ -212,8 +211,7 @@
                             layer.msg(res.message)
                         }else{
                             layer.msg(res.message, {time: 2000}, ()=>{
-                                window.parent.top.postMessage({event: 'return_gold', player_id: player_id, number: gold});
-                                window.location.reload();
+                                window.parent.top.postMessage({event: 'return_update'}, '*');
                             })
                         }
                 }, 'json');
@@ -227,6 +225,7 @@
             $('.form-item .number').val(0);
             $('.form-item .gold').val(0);
         })
+
         $('.form-item .add-number').on('click', function (){
             if(!disabled){
                 return false;
@@ -258,8 +257,44 @@
             $(".form-item .gold").val(gold);
             $(".form-item .number").val(number);
         })
-
+        $.changeGoldNumber = function (){
+            if(!disabled){
+                return false;
+            }
+            let number = parseInt($(".form-item .number").val());
+            let type = $('.form-item .cate.active').attr('data-type');
+            let redeemscale = "{{ $setting['gold_scale'] }}";
+            let goldScale = "{{ $setting['gold_torpedo_scale'] }}";
+            let diamondScale = "{{ $setting['diamond_torpedo_scale'] }}";
+            let gold = 0, pan = 0;
+            let torpedoSilver = "{{ $torpedo['torpedo_silver'] }}";
+            let torpedoGold = "{{ $torpedo['torpedo_gold'] }}";
+            let torpedoDiamond = "{{ $torpedo['torpedo_diamond'] }}";
+            if(number < 0 || number.toString().includes('.') || !/^\d+$/.test(number) || number.toString().includes('-')){
+                number = 0;
+            }
+            gold = number * redeemscale;
+            pan = torpedoSilver;
+            if(type == 26){
+                gold = number * redeemscale * goldScale;
+                pan = torpedoGold;
+            }
+            if(type == 27){
+                gold = number * redeemscale * diamondScale;
+                pan = torpedoDiamond;
+            }
+            if(number > pan){
+                layer.msg('鱼雷数量不足');
+                return false;
+            }
+            $(".form-item .gold").val(gold);
+            $(".form-item .number").val(number);
+        }
+        $('.form-item .gold-number').on('change', function (){
+            $.changeGoldNumber();
+        })
         $('.form-item .dec-number').on('click', function (){
+
             if(!disabled){
                 return false;
             }
@@ -269,6 +304,7 @@
             let goldScale = "{{ $setting['gold_torpedo_scale'] }}";
             let diamondScale = "{{ $setting['diamond_torpedo_scale'] }}";
             let gold = 0;
+            number--;
             gold = number * redeemscale;
             if(type == 26){
                 gold = number * redeemscale * goldScale;
