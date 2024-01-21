@@ -74,7 +74,7 @@
                             closeBtn: 1,
                             shadeClose: false,
                             shade: 0.7,
-                            area: ['90%', '90%'],
+                            area: ['85%', '85%'],
                             content: "{{ route('airdrop.iframe')}}?acc=" + data.account
                         });
                         break;
@@ -86,7 +86,7 @@
                             closeBtn: 1,
                             shadeClose: false,
                             shade: 0.7,
-                            area: ['90%', '90%'],
+                            area: ['85%', '85%'],
                             content: "{{ route('diamond.iframe')}}?acc=" + data.account
                         });
                         break;
@@ -98,7 +98,7 @@
                             closeBtn: 1,
                             shadeClose: false,
                             shade: 0.7,
-                            area: ['90%', '90%'],
+                            area: ['85%', '85%'],
                             content: "{{ route('gold.iframe')}}?acc=" + data.account
                         });
                         break;
@@ -110,7 +110,7 @@
                             closeBtn: 1,
                             shadeClose: false,
                             shade: 0.7,
-                            area: ['90%', '90%'],
+                            area: ['85%', '85%'],
                             content: "{{ route('vip.iframe')}}?acc=" + data.account
                         });
                         break;
