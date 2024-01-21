@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cost;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VipController extends Controller
 {
@@ -37,6 +38,10 @@ class VipController extends Controller
             $data = $request->all();
             $user = User::where('acc', $data['acc'])->first();
             if($user){
+                $verify = $this->verify($data['type'], $data['number'], $user);
+                if(!$verify){
+                    return $this->returnJson(1, null, '抱歉，当前鱼雷数量不足');
+                }
                 //更新VIP经验和鱼雷接口
                 $result = $this->client('vip_recharge', [
                     'acc' => $data['acc'],
@@ -51,6 +56,9 @@ class VipController extends Controller
                 if($result['status'] == 200){
                     $setting = config('setting');
                     $update = $this->getUserUpdateTorpedo($result['data']['items'], $setting);
+                    //根据鱼雷类型换算成白银鱼雷
+                    $torpedo = $this->scaler($data['type'], $data['number'], $setting);
+                    $update['consume_total'] = DB::raw('`consume_total` + '. $torpedo);
                     $vipExp = $user['vip_exp'] + $data['gold'];
                     $update['vip_exp'] = $vipExp;
                     $update['vip'] = $this->level($vipExp);

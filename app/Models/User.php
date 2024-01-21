@@ -36,7 +36,7 @@ class User extends Base
 
     protected $fillable = [
         'id', 'acc', 'nickname', 'player_id', 'identity', 'vip', 'vip_exp', 'ticket', 'status', 'fish_drop', 'buff_num', 'buff_end',
-        'win_probability', 'lucky_number', 'convert_total', 'buff_total',
+        'win_probability', 'lucky_number', 'convert_total', 'buff_total', 'consume_total',
         'torpedo_silver', 'torpedo_gold', 'torpedo_diamond', 'silver_number', 'created_at', 'updated_at'
     ];
 

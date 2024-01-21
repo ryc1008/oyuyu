@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use QL\QueryList;
 
 class DiamondController extends Controller
@@ -44,6 +45,10 @@ class DiamondController extends Controller
             $data = $request->all();
             $user = User::where('acc', $data['acc'])->first();
             if($user){
+                $verify = $this->verify($data['type'], $data['number'], $user);
+                if(!$verify){
+                    return $this->returnJson(1, null, '抱歉，当前鱼雷数量不足');
+                }
                 //更新钻石和鱼雷接口 opType//1增加 11减少
                 $result = $this->client('diamond_recharge', [
                     'acc' => $data['acc'],
@@ -59,6 +64,9 @@ class DiamondController extends Controller
                 if($result['status'] == 200){
                     $setting = config('setting');
                     $update = $this->getUserUpdateTorpedo($result['data']['items'], $setting);
+                    //根据鱼雷类型换算成白银鱼雷
+                    $torpedo = $this->scaler($data['type'], $data['number'], $setting);
+                    $update['consume_total'] = DB::raw('`consume_total` + '. $torpedo);
                     $user->update($update);
                     //生成兑换记录
                     Cost::create([

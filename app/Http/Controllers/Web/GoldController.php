@@ -45,6 +45,10 @@ class GoldController extends Controller
             $data = $request->all();
             $user = User::where('acc', $data['acc'])->first();
             if($user){
+                $verify = $this->verify($data['type'], $data['number'], $user);
+                if(!$verify){
+                    return $this->returnJson(1, null, '抱歉，当前鱼雷数量不足');
+                }
                 //更新金币和鱼雷接口 opType//1增加 11减少
                 $this->client('gold_recharge', [
                     'acc' => $data['acc'],

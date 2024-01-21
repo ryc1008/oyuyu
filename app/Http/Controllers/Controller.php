@@ -191,4 +191,24 @@ class Controller extends BaseController
         return $torpedo;
     }
 
+
+    //根据鱼雷类型判断鱼类数量
+    protected function verify($type, $number, $user){
+        switch ($type){
+            case 25: //白银鱼雷
+                $result = $user['torpedo_silver'] >= $number ? true : false;
+                break;
+            case 26: //黄金鱼雷
+                $result = $user['torpedo_gold'] >= $number ? true : false;
+                break;
+            case 27: //钻石鱼雷
+                $result = $user['torpedo_diamond'] >= $number ? true : false;
+                break;
+            default:
+                $result = false;
+                break;
+        }
+        return $result;
+    }
+
 }

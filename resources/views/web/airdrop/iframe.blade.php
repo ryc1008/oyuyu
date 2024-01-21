@@ -258,14 +258,28 @@
             if(acc){
                 let type = $('.form-item .cate.active').attr('data-type');
                 let number = $('.form-item .number').val();
-                if(!disabled){
+                let torpedoSilver = "{{ $torpedo['torpedo_silver'] }}";
+                let torpedoGold = "{{ $torpedo['torpedo_gold'] }}";
+                let torpedoDiamond = "{{ $torpedo['torpedo_diamond'] }}";
+                let pan = torpedoSilver;
+                if(type == 26){
+                    pan = torpedoGold;
+                }
+                if(type == 27){
+                    pan = torpedoDiamond;
+                }
+                if(number > pan){
+                    layer.msg('鱼雷数量不足');
                     return false;
                 }
-                disabled = false;
                 if(number < 1){
                     layer.msg('请填写空投鱼雷数量');
                     return false;
                 }
+                if(!disabled){
+                    return false;
+                }
+                disabled = false;
                 $.post("{{ route('airdrop.update') }}",
                     {acc: acc, type: type, number: number, '_token': "{{csrf_token()}}"},
                     function (res){

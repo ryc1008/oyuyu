@@ -49,21 +49,11 @@ class AirdropController extends Controller
             }
             $user = User::where('acc', $data['acc'])->first();
             if($user){
-                switch($data['type']){
-                    case 26:
-                        $torpedo = $user['torpedo_gold'];
-                        break;
-                    case 27:
-                        $torpedo = $user['torpedo_diamond'];
-                        break;
-                    default:
-                        $torpedo = $user['torpedo_silver'];
-                        break;
+                $verify = $this->verify($data['type'], $data['number'], $user);
+                if(!$verify){
+                    return $this->returnJson(1, null, '抱歉，当前鱼雷数量不足');
                 }
                 //由于数据库和接口是一致性的，所以不需要单独查询，直接更新接口就行，不然空投了继续使用会出问题
-                if($torpedo < $data['number']){
-                    return $this->returnJson(1, null, '库存不足');
-                }
                 //更新自己鱼雷及接口
                 $result = $this->updateTorpedo($data['acc'], $data['type'], $data['number'], 11);
                 if($result['status'] == 200){

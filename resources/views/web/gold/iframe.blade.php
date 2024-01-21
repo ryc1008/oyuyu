@@ -195,6 +195,21 @@
                 let type = $('.form-item .cate.active').attr('data-type');
                 let gold = $('.form-item .gold').val();
                 let number = $('.form-item .number').val();
+                let torpedoSilver = "{{ $torpedo['torpedo_silver'] }}";
+                let torpedoGold = "{{ $torpedo['torpedo_gold'] }}";
+                let torpedoDiamond = "{{ $torpedo['torpedo_diamond'] }}";
+                let pan = torpedoSilver;
+                if(type == 26){
+                    pan = torpedoGold;
+                }
+                if(type == 27){
+                    pan = torpedoDiamond;
+                }
+                if(number > pan){
+                    layer.msg('鱼雷数量不足');
+                    return false;
+                }
+
                 if(number < 1){
                     layer.msg('请输入你要兑换的鱼雷数量');
                     return false;
@@ -208,6 +223,7 @@
                     {acc: acc, type: type, gold: gold, number: number, '_token': "{{csrf_token()}}"},
                     function (res){
                         if(res.status){
+                            disabled = true;
                             layer.msg(res.message)
                         }else{
                             layer.msg(res.message, {time: 2000}, ()=>{
