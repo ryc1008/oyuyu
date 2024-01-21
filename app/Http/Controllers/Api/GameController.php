@@ -17,6 +17,7 @@ class GameController extends Controller {
      */
     public function falling(Request $request){
         $data = $request->all();
+        loger('回调数据',json_encode($data));
         return $this->buyuJson(0, $data, '恭喜您, 获得11个黄金鱼雷');
 
 
