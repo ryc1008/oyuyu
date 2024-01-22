@@ -29,6 +29,7 @@ class UserController extends Controller
 
     }
 
+    //获取用户VIP
     public function vip(Request $request){
         try {
             $acc = $request->get('acc', '');
