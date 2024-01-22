@@ -205,7 +205,7 @@
                 if(type == 27){
                     pan = torpedoDiamond;
                 }
-                if(number > pan){
+                if(parseInt(number) > parseInt(pan)){
                     layer.msg('鱼雷数量不足');
                     return false;
                 }
@@ -266,7 +266,7 @@
                 gold = number * redeemscale * diamondScale;
                 pan = torpedoDiamond;
             }
-            if(number > pan){
+            if(parseInt(number) > parseInt(pan)){
                 layer.msg('鱼雷数量不足');
                 return false;
             }
@@ -299,7 +299,7 @@
                 gold = number * redeemscale * diamondScale;
                 pan = torpedoDiamond;
             }
-            if(number > pan){
+            if(parseInt(number) > parseInt(pan)){
                 layer.msg('鱼雷数量不足');
                 return false;
             }
