@@ -103,6 +103,11 @@
                         });
                         break;
                     case 'change_vip':
+                        let gold = parseInt("{{$user['vip_exp']}}");
+                        if(gold >= 50000){
+                            layer.msg('VIP等级已经为最高等级');
+                            return false;
+                        }
                         layer.open({
                             type: 2,
                             skin: '',

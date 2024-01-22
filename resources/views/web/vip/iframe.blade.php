@@ -282,7 +282,7 @@
                 return false;
             }
             console.log(gold)
-            if(gold > 50000){
+            if(gold >= 50000){
                 layer.msg('VIP等级已经为最高等级');
                 return false;
             }
