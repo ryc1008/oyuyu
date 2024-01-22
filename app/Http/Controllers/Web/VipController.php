@@ -22,7 +22,8 @@ class VipController extends Controller
                     $update = $this->getUserUpdateTorpedo($result['data']['items'], $setting);
                     $user->update($update);
                     $torpedo = $update;
-                    return view('web.vip.iframe', compact('user', 'torpedo', 'setting'));
+                    $level = $this->level($user['vip_exp']);
+                    return view('web.vip.iframe', compact('user', 'torpedo', 'setting', 'level'));
                 }
             }
             return $this->returnJson(1, null, 'system error');
@@ -90,6 +91,8 @@ class VipController extends Controller
         });
         return array_search(max($records), $records);
     }
+
+
 
 
 

@@ -148,6 +148,9 @@
             display: block;
             margin-bottom: 15px;
         }
+        .vip-level{
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -166,14 +169,15 @@
                 <div class="number-box">
                     <div class="form-item-title">兑换数量： </div>
                     <img class="dec-number" src="{{ asset('image/web/dec.png') }}" alt="">
-                    <input type="number"  name="number" class='number vip-number' value="0" placeholder="兑换数量">
+                    <input type="number"  name="number" class='number vip-number' value="0" placeholder="兑换数量" readonly>
                     <img class="add-number" src="{{ asset('image/web/add.png') }}" alt="">
                 </div>
             </div>
             <div class="form-item">
                 <div class="number-box">
-                    <div class="form-item-title">获得经验： </div>
-                    <input type="number" id="airdrop-gold" name="gold" class='gold' value="0" placeholder="获得经验" readonly>
+                    <div class="form-item-title">VIP经验： </div>
+                    <input type="number" id="airdrop-gold" name="gold" class='gold' value="{{$user['vip_exp']}}" placeholder="获得的VIP经验" readonly>
+                    <div class="vip-level"> V<span class="vlevel">{{$level}}</span> </div>
                 </div>
             </div>
             <div class="airdrop-form-btn form-submit">确 定</div>
@@ -239,6 +243,13 @@
             $('.form-item .number').val(0);
             $('.form-item .gold').val(0);
         })
+        $.vipLevel = function (vipExp){
+            let exps = [0, 10, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000];
+            let records = exps.filter((item)=> {
+                return item <= vipExp;
+            });
+            return records.length - 1;
+        }
         $('.form-item .add-number').on('click', function (){
             if(!disabled){
                 return false;
@@ -268,10 +279,13 @@
                 return false;
             }
             if(gold > 50000){
-                layer.msg('VIP经验最大值');
+                layer.msg('VIP等级已经为最高等级');
+                return false;
             }
             $(".form-item .gold").val(gold);
             $(".form-item .number").val(number);
+            let level = $.vipLevel(gold);
+            $(".form-item .vip-level .vlevel").html(level);
         })
         $.changeVipNumber = function (){
             if(!disabled){
@@ -301,6 +315,10 @@
             }
             if(parseInt(number) > parseInt(pan)){
                 layer.msg('鱼雷数量不足');
+                return false;
+            }
+            if(gold > 50000){
+                layer.msg('VIP等级已经为最高等级');
                 return false;
             }
             $(".form-item .gold").val(gold);
