@@ -29,7 +29,18 @@ class UserController extends Controller
 
     }
 
-
+    public function vip(Request $request){
+        try {
+            $acc = $request->get('acc', '');
+            $user = User::where('acc', $acc)->first();
+            if($user){
+                return $this->returnJson(0, $user['vip_exp']);
+            }
+            return $this->returnJson(1, null, 'system error');
+        } catch (\Throwable $e) {
+            return $this->returnJson(1, null, $e->getMessage());
+        }
+    }
 
 
 

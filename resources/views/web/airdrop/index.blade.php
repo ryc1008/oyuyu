@@ -103,21 +103,25 @@
                         });
                         break;
                     case 'change_vip':
-                        let gold = parseInt("{{$user['vip_exp']}}");
-                        if(gold >= 50000){
-                            layer.msg('VIP等级已经为最高等级');
-                            return false;
-                        }
-                        layer.open({
-                            type: 2,
-                            skin: '',
-                            title: '',
-                            closeBtn: 1,
-                            shadeClose: false,
-                            shade: 0.7,
-                            area: ['85%', '85%'],
-                            content: "{{ route('vip.iframe')}}?acc=" + data.account
-                        });
+                        $.get("{{ route('user.vip') }}", {acc: data.account}, function (res){
+                            if(res.status === 0){
+                                if(res.data < 10){
+                                    layer.open({
+                                        type: 2,
+                                        skin: '',
+                                        title: '',
+                                        closeBtn: 1,
+                                        shadeClose: false,
+                                        shade: 0.7,
+                                        area: ['85%', '85%'],
+                                        content: "{{ route('vip.iframe')}}?acc=" + data.account
+                                    });
+                                }else{
+                                    layer.msg('VIP等级已经为最高等级');
+                                }
+                            }
+                        }, 'json');
+
                         break;
                     case 'login':
                         $.post("{{ route('user.login') }}",

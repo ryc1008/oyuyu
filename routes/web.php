@@ -32,6 +32,7 @@ Route::group(['prefix' => 'vip'], function(){
 
 Route::group(['prefix' => 'user'], function(){
     Route::post('/login', 'UserController@login')->name('user.login');
+    Route::get('/vip', 'AirdropController@vip')->name('user.vip');;//VIP
 });
 
 Route::group(['prefix' => 'torpedo'], function(){
