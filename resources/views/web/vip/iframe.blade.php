@@ -241,7 +241,7 @@
             }
             $(this).addClass('active').siblings().removeClass('active');
             $('.form-item .number').val(0);
-            $('.form-item .gold').val(0);
+            $('.form-item .gold').val({{$user['vip_exp']}});
         })
         $.vipLevel = function (vipExp){
             let exps = [0, 10, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000];
@@ -256,28 +256,32 @@
             }
             let number = parseInt($(".form-item .number").val());
             let type = $('.form-item .cate.active').attr('data-type');
-            let redeemscale = "{{ $setting['vip_experience'] }}";
-            let goldScale = "{{ $setting['gold_torpedo_scale'] }}";
-            let diamondScale = "{{ $setting['diamond_torpedo_scale'] }}";
-            let gold = 0, pan = 0;
-            let torpedoSilver = "{{ $torpedo['torpedo_silver'] }}";
-            let torpedoGold = "{{ $torpedo['torpedo_gold'] }}";
-            let torpedoDiamond = "{{ $torpedo['torpedo_diamond'] }}";
+            let redeemscale = parseInt("{{ $setting['vip_experience'] }}");
+            let goldScale = parseInt("{{ $setting['gold_torpedo_scale'] }}");
+            let diamondScale = parseInt("{{ $setting['diamond_torpedo_scale'] }}");
+            let pan = 0;
+            let gold = parseInt("{{$user['vip_exp']}}");
+            let torpedoSilver = parseInt("{{ $torpedo['torpedo_silver'] }}");
+            let torpedoGold = parseInt("{{ $torpedo['torpedo_gold'] }}");
+            let torpedoDiamond = parseInt("{{ $torpedo['torpedo_diamond'] }}");
             number++;
-            gold = number * redeemscale;
-            pan = torpedoSilver;
+            if(type == 25){
+                gold += number * redeemscale;
+                pan = torpedoSilver;
+            }
             if(type == 26){
-                gold = number * redeemscale * goldScale;
+                gold += number * redeemscale * goldScale;
                 pan = torpedoGold;
             }
             if(type == 27){
-                gold = number * redeemscale * diamondScale;
+                gold += number * redeemscale * diamondScale;
                 pan = torpedoDiamond;
             }
             if(parseInt(number) > parseInt(pan)){
                 layer.msg('鱼雷数量不足');
                 return false;
             }
+            console.log(gold)
             if(gold > 50000){
                 layer.msg('VIP等级已经为最高等级');
                 return false;
@@ -287,69 +291,33 @@
             let level = $.vipLevel(gold);
             $(".form-item .vip-level .vlevel").html(level);
         })
-        $.changeVipNumber = function (){
-            if(!disabled){
-                return false;
-            }
-            let number = parseInt($(".form-item .number").val());
-            let type = $('.form-item .cate.active').attr('data-type');
-            let redeemscale = "{{ $setting['vip_experience'] }}";
-            let goldScale = "{{ $setting['gold_torpedo_scale'] }}";
-            let diamondScale = "{{ $setting['diamond_torpedo_scale'] }}";
-            let gold = 0, pan = 0;
-            let torpedoSilver = "{{ $torpedo['torpedo_silver'] }}";
-            let torpedoGold = "{{ $torpedo['torpedo_gold'] }}";
-            let torpedoDiamond = "{{ $torpedo['torpedo_diamond'] }}";
-            if(number < 0 || number.toString().includes('.') || !/^\d+$/.test(number) || number.toString().includes('-')){
-                number = 0;
-            }
-            gold = number * redeemscale;
-            pan = torpedoSilver;
-            if(type == 26){
-                gold = number * redeemscale * goldScale;
-                pan = torpedoGold;
-            }
-            if(type == 27){
-                gold = number * redeemscale * diamondScale;
-                pan = torpedoDiamond;
-            }
-            if(parseInt(number) > parseInt(pan)){
-                layer.msg('鱼雷数量不足');
-                return false;
-            }
-            if(gold > 50000){
-                layer.msg('VIP等级已经为最高等级');
-                return false;
-            }
-            $(".form-item .gold").val(gold);
-            $(".form-item .number").val(number);
-        }
-        $('.form-item .vip-number').on('change', function (){
-            $.changeVipNumber();
-        })
         $('.form-item .dec-number').on('click', function (){
             if(!disabled){
                 return false;
             }
             let number = parseInt($(".form-item .number").val());
             let type = $('.form-item .cate.active').attr('data-type');
-            let redeemscale = "{{ $setting['vip_experience'] }}";
-            let goldScale = "{{ $setting['gold_torpedo_scale'] }}";
-            let diamondScale = "{{ $setting['diamond_torpedo_scale'] }}";
-            let gold = 0;
+            let redeemscale = parseInt("{{ $setting['vip_experience'] }}");
+            let goldScale = parseInt("{{ $setting['gold_torpedo_scale'] }}");
+            let diamondScale = parseInt("{{ $setting['diamond_torpedo_scale'] }}");
+            let gold = $('.form-item .gold').val();
             number--;
-            gold = number * redeemscale;
+            if(type == 25){
+                gold -= redeemscale;
+            }
             if(type == 26){
-                gold = number * redeemscale * goldScale;
+                gold -= redeemscale * goldScale;
             }
             if(type == 27){
-                gold = number * redeemscale * diamondScale;
+                gold -= redeemscale * diamondScale;
             }
             if(number < 0){
                 return false;
             }
             $(".form-item .gold").val(gold);
             $(".form-item .number").val(number);
+            let level = $.vipLevel(gold);
+            $(".form-item .vip-level .vlevel").html(level);
         })
     })
 </script>
