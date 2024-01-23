@@ -5,9 +5,6 @@
                 <div class="circle"></div>
             </div>
         </div>
-        <div class="login-qiu">
-            <img :src="'/image/admin/qiu.png'" alt="">
-        </div>
         <div class="login">
             <div class="login-bg"></div>
             <div class="form">
@@ -124,9 +121,10 @@ export default {
 .page {
     width: calc(100vw);
     height: calc(100vh);
-    background-image: url("/image/admin/login.jpg");
+    background-image: url("/image/admin/login.jpeg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    background-clip: content-box;
 }
 
 .login {
@@ -134,7 +132,7 @@ export default {
     margin: auto;
     /*height: 560px;*/
     position: absolute;
-    left: calc(100vw - 40%);
+    left: calc(40vw);
     top: 100px;
 }
 
@@ -151,7 +149,7 @@ export default {
     text-align: left;
     margin-bottom: 35px;
     font-size: 28px;
-    color: #ffffff;
+    color: #C744EC;
 }
 
 .login .form .title span {
@@ -181,7 +179,7 @@ export default {
 .login .form .refresh {
     margin-bottom: 15px;
     text-align: right;
-    color: #ffffff;
+    color: #FFF;
     font-size: 12px;
 }
 
@@ -197,7 +195,7 @@ export default {
     margin-top: 15px;
     font-size: 12px;
     text-align: center;
-    color: #ffffff;
+    color: #FFF;
 }
 
 .pass-input {

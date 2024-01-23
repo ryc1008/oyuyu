@@ -505,16 +505,19 @@ i {
 
 .login .el-input__inner{
     background: transparent !important;
-    color: #ffffff;
-    border-color: #6050CC !important;
-    caret-color:#ffffff;
+    color: #C744EC;
+    border-color: #C744EC !important;
+    caret-color:#C744EC;
+}
+.login .el-input__inner::-webkit-input-placeholder{
+    color: #FFF;
 }
 
 .login .el-input::-webkit-scrollbar-corner {
     background: transparent !important;
 }
 .login i {
-    color: #ffffff;
+    color: #C744EC;
 }
 
 input:-webkit-autofill{
